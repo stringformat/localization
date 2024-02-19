@@ -7,19 +7,17 @@ namespace Localization.Infrastructure;
 
 public static class EntityTypeBuilderExtensions
 {
-    public static EntityTypeBuilder<TEntity> HasLocalization<TEntity>(
+    public static EntityTypeBuilder<TEntity> HasI18n<TEntity>(
         this EntityTypeBuilder<TEntity> builder, 
-        Expression<Func<TEntity, IEnumerable<LocalizedString.CultureAndValue>?>> keyExpression,
-        string name)
+        Expression<Func<TEntity, IEnumerable<I18nValue.CultureAndValue>?>> keyExpression)
         where TEntity : class
     {
         builder.OwnsMany(keyExpression, navigationBuilder =>
         {
-            navigationBuilder.ToTable($"Localize_{typeof(TEntity).Name}_{name}");
+            navigationBuilder.ToJson();
             navigationBuilder.Property(x => x.Culture);
             navigationBuilder.Property(x => x.Value);
         });
-        builder.Navigation(keyExpression).AutoInclude(false);
         
         return builder;
     }

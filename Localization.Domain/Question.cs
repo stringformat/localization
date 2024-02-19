@@ -2,20 +2,19 @@
 
 public class Question
 {
-    public Question(LocalizedString title, string description)
-    {
-        Title = title;
-        Description = description;
-    }
-    
-    //ORM
     private Question()
     {
     }
 
+    public Question(I18nValue? title, string description)
+    {
+        Title = title;
+        Description = description;
+    }
+
     public Guid Id { get; } = Guid.NewGuid();
 
-    public LocalizedString Title { get; }
+    public I18nValue Title { get; }
 
     public string Description { get; }
 }

@@ -2,24 +2,26 @@
 
 public class Service(IRepository repository) : IService
 {
-    public async Task CreateQuestion()
+    public async Task<Question> CreateQuestion()
     {
-        var title = new LocalizedString
+        var title = new I18nValue("Mon titre par default")
         {
-            new("fr-FR", "Mon titre"),
             new("en-US", "My title")
         };
         
         var question = new Question(title, "Ma description");
         
         await repository.CreateQuestion(question);
+        return question;
     }
 
-    public async Task<Question?> GetQuestion()
+    public async Task<Question?> GetQuestion(Guid id)
     {
-        var question = await repository.GetQuestion(Guid.Parse("3bcf497a-4e28-41bb-85f2-6896d66d78ca"), "en-US");
+        var question = await repository.GetQuestion(id);
 
-        string test = question!.Title;
+        var test = question!.Title.GetValue("en-US");
+
+        string test2 = question.Title;
 
         return question;
     }

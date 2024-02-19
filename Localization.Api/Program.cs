@@ -10,8 +10,8 @@ builder.Services.AddDbContext<LocalizationContext>(optionsBuilder => optionsBuil
 
 var app = builder.Build();
 
-app.MapGet("/create", async (IService service) => await service.CreateQuestion());
+app.MapGet("/question/create", async (IService service) => await service.CreateQuestion());
 
-app.MapGet("/get", async (IService service) => await service.GetQuestion());
+app.MapGet("/question/{id}", async (Guid id, IService service) => await service.GetQuestion(id));
 
 app.Run();

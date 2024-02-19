@@ -2,6 +2,6 @@ namespace Localization.Domain;
 
 public interface IService
 {
-    Task CreateQuestion();
-    Task<Question?> GetQuestion();
+    Task<Question> CreateQuestion();
+    Task<Question?> GetQuestion(Guid id);
 }

@@ -19,12 +19,11 @@ public class Repository : IRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task<Question?> GetQuestion(Guid id, string culture)
+    public async Task<Question?> GetQuestion(Guid id)
     {
         return await _context
             .Set<Question>()
             .AsNoTracking()
-            .Include(x => x.Title.Where(y => y.Culture == culture))
             .SingleOrDefaultAsync(x => x.Id == id);
     }
 }

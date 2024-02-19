@@ -10,8 +10,8 @@ public class QuestionConfiguration : IEntityTypeConfiguration<Question>
     {
         builder.ToTable(nameof(Question));
         builder.HasKey(x => x.Id);
-        
-        builder.HasLocalization(x => x.Title, nameof(Question.Title));
+
+        builder.HasI18n(x => x.Title);
         builder.Property(x => x.Description);
     }
 }
